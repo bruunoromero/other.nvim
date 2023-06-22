@@ -1,9 +1,10 @@
 local M = {}
 
 -- Actual opening
-function M.openFile(openCommand, filename, onOpenFileHook)
+function M.openFile(openCommand, match, onOpenFileHook)
+	local filename = match.filename
 	local exists = (vim.fn.filereadable(filename) == 1 and true or false)
-	local shouldOpenFile = onOpenFileHook(filename, exists)
+	local shouldOpenFile = onOpenFileHook(filename, exists, match.mapping)
 	if shouldOpenFile then
 		vim.api.nvim_command(":" .. openCommand .. " " .. filename)
 		vim.g.other_lastopened = filename
@@ -39,12 +40,12 @@ end
 
 -- Getting the index of an element in a two-dimensional lua table
 function M.indexOf(array, value)
-    for i, v in ipairs(array) do
-        if v == value then
-            return i
-        end
-    end
-    return nil
+	for i, v in ipairs(array) do
+		if v == value then
+			return i
+		end
+	end
+	return nil
 end
 
 return M

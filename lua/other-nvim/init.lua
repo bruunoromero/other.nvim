@@ -155,6 +155,7 @@ local findOther = function(filename, context)
 
 				if found == false and fn ~= value then
 					table.insert(matches, {
+						mapping = mapping,
 						context = mapping.context,
 						filename = value,
 						exists = (vim.fn.filereadable(value) == 1 and true or false),
@@ -250,7 +251,7 @@ local open = function(context, openCommand)
 			-- when dealing with a single file -> just open it
 			if matchesCount == 1 then
 				M.setOtherFileToBuffer(matches[1].filename, vim.api.nvim_get_current_buf())
-				util.openFile(openCommand, matches[1].filename, options.hooks.onOpenFile)
+				util.openFile(openCommand, matches[1], options.hooks.onOpenFile)
 			else
 				matches = options.hooks.filePickerBeforeShow(matches)
 				-- otherwise open a window to pick a file

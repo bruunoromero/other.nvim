@@ -75,7 +75,7 @@ local function _openFile(command, position)
 		vim.api.nvim_set_current_buf(currentBuffer)
 
 		-- actual opening
-		util.openFile(command, filename, otherInstance.getOptions()["hooks"].onOpenFile)
+		util.openFile(command, matches[pos], otherInstance.getOptions()["hooks"].onOpenFile)
 	end
 end
 
