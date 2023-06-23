@@ -250,7 +250,7 @@ local open = function(context, openCommand)
 		if matchesCount > 0 then
 			-- when dealing with a single file -> just open it
 			if matchesCount == 1 then
-				M.setOtherFileToBuffer(matches[1].filename, vim.api.nvim_get_current_buf())
+				M.setOtherFileToBuffer(matches[1], vim.api.nvim_get_current_buf())
 				util.openFile(openCommand, matches[1], options.hooks.onOpenFile)
 			else
 				matches = options.hooks.filePickerBeforeShow(matches)
