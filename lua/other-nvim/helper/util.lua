@@ -4,7 +4,7 @@ local M = {}
 function M.openFile(openCommand, match, onOpenFileHook)
 	local filename = match.filename
 	local exists = (vim.fn.filereadable(filename) == 1 and true or false)
-	local shouldOpenFile = onOpenFileHook(filename, exists, match.mapping)
+	local shouldOpenFile = onOpenFileHook(filename, exists, match.origin, match.mapping)
 	if shouldOpenFile then
 		vim.api.nvim_command(":" .. openCommand .. " " .. filename)
 		vim.g.other_lastopened = filename

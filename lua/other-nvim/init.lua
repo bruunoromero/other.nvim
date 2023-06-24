@@ -155,6 +155,7 @@ local findOther = function(filename, context)
 
 				if found == false and fn ~= value then
 					table.insert(matches, {
+						origin = filename,
 						mapping = mapping,
 						context = mapping.context,
 						filename = value,
